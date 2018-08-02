@@ -1,11 +1,15 @@
 class ProjectsController < ApplicationController
   before_action :set_project, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!, except: [:index, :show]
+  
+  # Record Not Found
+  rescue_from ActiveRecord::RecordNotFound, with: :invalid_project_id
+
   # GET /projects
   # GET /projects.json
   def index
     if user_signed_in?
-      @projects = current_user.projects
+      @projects = Project.all
     else
       redirect_to user_session_path
     end
@@ -76,4 +80,10 @@ class ProjectsController < ApplicationController
     def project_params
       params.require(:project).permit(:title, :description)
     end
+
+  private
+    def invalid_project_id
+      logger.error "Attempt to access Invalid Project ID #{params[:id]}"
+      redirect_to projects_url, notice: 'Invalid Project ID'
+    end  
 end
