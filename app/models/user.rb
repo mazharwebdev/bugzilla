@@ -17,6 +17,9 @@ class User < ApplicationRecord
   #comments
   has_many :comments
 
+  #Votes
+  has_many :votes
+
   def bugs
     Bugs.where("created_id = ? OR developed_id = ?", self.id, self.id)
   end
