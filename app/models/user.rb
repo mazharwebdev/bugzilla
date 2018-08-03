@@ -1,6 +1,7 @@
 class User < ApplicationRecord
 
-  enum user_type: {MNG: 0, QA: 1, DEV: 2}
+  # enum user_types: {MNG: 0, QA: 1, DEV: 2}
+  enum role: [:manager, :tester, :developer]
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
@@ -23,4 +24,12 @@ class User < ApplicationRecord
   def bugs
     Bugs.where("created_id = ? OR developed_id = ?", self.id, self.id)
   end
+
+  # set Default User Callbacks
+  after_initialize do
+  if self.new_record?
+    self.role ||= :manager
+    end
+  end
+
 end

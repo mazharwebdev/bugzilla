@@ -26,7 +26,7 @@
     <%= f.password_field :password_confirmation, autocomplete: "off" %>
   </div>
   <div class="field">
-    <%= f.select :user_type, options_for_select(User.user_types.keys.to_a)%>
+    <%= f.select :role, options_for_select(User.roles.keys.to_a)%>
   </div>
   <div class="actions">
     <%= f.submit "Sign up" %>
