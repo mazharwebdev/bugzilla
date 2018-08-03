@@ -17,8 +17,10 @@
         <td><%= project.title %></td>
         <td><%= project.description %></td>
         <td><%= link_to 'Show', project %></td>
-        <td><%= link_to 'Edit', edit_project_path(project) %></td>
-        <td><%= link_to 'Destroy', project, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <%if current_user.role == "manager" %>
+          <td><%= link_to 'Edit', edit_project_path(project) %></td>
+          <td><%= link_to 'Destroy', project, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% end %>  
       </tr>
     <% end %>
   </tbody>
@@ -26,7 +28,9 @@
 
 <br>
 
+<% if current_user.role == "manager" %>
 <%= link_to 'New Project', new_project_path %>
+<% end %>
 
 <br>
 <%= link_to 'Back To Dashboard', dashboard_index_path %>

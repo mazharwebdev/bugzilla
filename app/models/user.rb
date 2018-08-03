@@ -2,6 +2,8 @@ class User < ApplicationRecord
 
   # enum user_types: {MNG: 0, QA: 1, DEV: 2}
   enum role: [:manager, :tester, :developer]
+  after_initialize :set_default_role, :if => :new_record?
+
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
@@ -26,10 +28,9 @@ class User < ApplicationRecord
   end
 
   # set Default User Callbacks
-  after_initialize do
-  if self.new_record?
-    self.role ||= :manager
+  private
+    def set_default_role
+      self.role ||= :manager
     end
-  end
 
 end
