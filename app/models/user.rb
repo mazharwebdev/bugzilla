@@ -14,6 +14,9 @@ class User < ApplicationRecord
   has_many :created_bugs,    class_name: "Bug", foreign_key: "created_id"
   has_many :developed_bugs, class_name: "Bug", foreign_key: "developed_id"
 
+  #comments
+  has_many :comments
+
   def bugs
     Bugs.where("created_id = ? OR developed_id = ?", self.id, self.id)
   end
