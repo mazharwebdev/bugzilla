@@ -20,6 +20,8 @@ ActiveRecord::Schema.define(version: 20180802120228) do
     t.string "bug_type"
     t.string "status"
     t.integer "project_id"
+    t.integer "created_id"
+    t.integer "developed_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["project_id"], name: "index_bugs_on_project_id"
