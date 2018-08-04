@@ -6,25 +6,33 @@
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-  </head>
+    </head>
 
   <body>
+    <!-- Loging Logout Button Logic -->
+    <div class="container login_info"> 
+      <% if user_signed_in? %>
+        <%= link_to('Sign Out', destroy_user_session_path, method: :delete) %> 
+        <h3>Signed in as a <%= current_user.role.capitalize %> </h3>       
+      <% else %>
+        <h1>Welcome to Bug Tracking System</h1>
+        <br>
+        <%= link_to('Login', new_user_session_path)  %> 
+        <%= link_to 'Sign Up', new_user_registration_path %> 
+      <% end %>
 
-    <% if user_signed_in? %>
-      <%= link_to('Logout', destroy_user_session_path, method: :delete) %>        
-    <% else %>
-      <h1>Welcome to Bug Tracking System</h1>
-      <br>
-      <%= link_to('Login', new_user_session_path)  %> 
-      <%= link_to 'Sign Up', new_user_registration_path %> 
-    <% end %>
-
+    <!-- Sign Up Notice -->
 <!--     <p class="notice"><%= notice %></p>
- -->    
-    <p class="alert"><%= alert %></p>
-    <% if flash[:error] %>
-      <p><%= flash[:error] %></p>
-    <% end %>
-    <%= yield %>
+ -->  <p class="alert"><%= alert %></p>
+      <% if flash[:error] %>
+        <p><%= flash[:error] %></p>
+      <% end %>
+      <%= yield %>
+      <br>
+      <% if request.url != 'http://localhost:3000' %>
+           <%= link_to 'Back To Dashboard', dashboard_index_path %>
+      <% end %>
+     
+    </div>
   </body>
 </html>
