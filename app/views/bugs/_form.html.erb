@@ -1,0 +1,53 @@
+<%= form_with(model: bug, local: true) do |form| %>
+  <% if bug.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(project.errors.count, "error") %> prohibited this project from being saved:</h2>
+
+      <ul>
+      <% project.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :title %>
+    <%= form.text_field :title, id: :project_title %>
+  </div>
+
+  <div class="field">
+    <%= form.label :description %>
+    <%= form.text_area :description, id: :project_description, :rows => 10, :cols => 79 %>
+  </div>
+
+  <div class="field">
+    <%= form.label :deadline %>
+    <%= form.date_select :deadline %>
+  </div>
+
+  <div class="field">
+    <%= form.label :bug_type %>
+    <%= form.select(:bug_type, Bug.bugTypes.keys.map {|bugTypes| [bugTypes.titleize,bugTypes]}, {}, { :id => 'j_bug_type' }) %>
+  </div>
+
+  <div class="field status" id="feature" style="display:none">
+    <%= form.label :status %>
+    <%= form.select(:status, options_for_select(Bug::FEATURE_AR), {}, { :id => 'j_feature' })%>
+  </div>
+
+  <div class="field status" id="bug" style="display:none">
+    <%= form.label :status %>
+    <%= form.select(:status, options_for_select(Bug::BUG_AR) , {}, { :id => 'j_bug' }) %>
+  </div>
+
+  <div class="field">
+    <%= form.label :developer_id %>
+    <%= form.collection_select :developer_id, User.all.where('role' => 'developer') , :id, :name%>
+  </div>
+
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

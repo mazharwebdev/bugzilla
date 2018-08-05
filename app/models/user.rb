@@ -23,9 +23,9 @@ class User < ApplicationRecord
   #Votes
   has_many :votes
 
-  def bugs
-    Bugs.where("created_id = ? OR developed_id = ?", self.id, self.id)
-  end
+  # def bugs
+  #   Bugs.where("created_id = ? OR developed_id = ?", self.id, self.id)
+  # end
 
   # set Default User Callbacks
   private

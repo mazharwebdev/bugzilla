@@ -8,15 +8,17 @@
                 </div>
                 <div class="panel-body">
                     <div class="row">
-                        <div class="col-xs-6 col-md-6">
+                        <div class="col-xs-4 col-md-4">
                       
                           <a href="<%= projects_path %>" class="btn btn-danger btn-lg" role="button"><span class="glyphicon glyphicon-list-alt"></span>All Projects <br/></a></br></br> 
                           <% if current_user.role == "manager" %>
                             <a href="<%= new_project_path %>" class="btn btn-danger btn-lg" role="button"><span class="glyphicon glyphicon-list-alt"></span>Create Projects <br/></a>
                           <% end %>  
-                          
-                          <a href="#" class="btn btn-warning btn-lg" role="button"><span class="glyphicon glyphicon-bookmark"></span> <br/>Bookmarks</a>
-                          <a href="#" class="btn btn-primary btn-lg" role="button"><span class="glyphicon glyphicon-comment"></span> <br/>Comments</a>
+
+                        </div>
+
+                         <div class="col-xs-4 col-md-4">
+                        
                         </div>
                     </div>
                 </div>

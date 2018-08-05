@@ -11,7 +11,16 @@
 // about supported directives.
 //
 //= require jquery
+//= require jquery.turbolinks
 //= require rails-ujs
 //= require turbolinks
 //= require bootstrap-sprockets
 //= require_tree .
+
+$(document).on('turbolinks:load', function () {
+  $('#feature').show();
+  $('#j_bug_type').change(function() {
+   $('.status').hide();
+   $('#' + $(this).val()).show();
+  });
+});
