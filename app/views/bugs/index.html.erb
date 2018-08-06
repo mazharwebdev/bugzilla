@@ -1,2 +1,34 @@
-<h1>Bugs#index</h1>
-<p>Find me in app/views/bugs/index.html.erb</p>
+<p id="notice"><%= notice %></p>
+
+<h1>Bug Lists</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Project Title</th>
+      <th>Bug Title</th>
+      <th>Bug Description</th>
+      <th>Deadline</th>
+      <th>Screenshot</th>
+      <th>BugType</th>
+      <th>Created By</th>
+      <th>Developed By</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @bugs.each do |bug| %>
+      <tr>
+        <td><%= link_to Project.find(bug.project_id).title, project_path(:id => bug.project_id) %></td>
+        <td><%= link_to bug.title, bug_path(bug.id) %></td>
+        <td><%= bug.description %></td>
+        <td><%= bug.deadline %></td>
+        <td> <%= image_tag(bug.screenshot_url(:thumb).to_s)   %></td>
+        <td><%= bug.bug_type %></td>
+        <td><%= User.find(bug.created_id).name %></td>
+        <td><%= User.find(bug.developed_id).name %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

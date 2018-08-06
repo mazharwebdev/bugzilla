@@ -1,2 +1,40 @@
-<h1>Bugs#show</h1>
-<p>Find me in app/views/bugs/show.html.erb</p>
+<p id="notice"><%= notice %></p>
+
+<h1> Bug Detail </h1>
+<p>
+  <strong>Title:</strong>
+  <%= @bug.title %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @bug.description %>
+</p>
+
+<p>
+  <strong>Deadline:</strong>
+  <%= @bug.deadline %>
+</p>
+
+<p>
+  <strong>Screenshot:</strong>
+  <%= image_tag(@bug.screenshot_url(:thumb).to_s) %>
+</p>
+
+<p>
+  <strong>Bug Type:</strong>
+  <%= @bug.bug_type %>
+</p>
+
+<p>
+  <strong>Created By:</strong>
+  <%= User.find(@bug.created_id).name %>
+</p>
+
+<p>
+  <strong>Developed By:</strong>
+  <%= User.find(@bug.developed_id).name %>
+</p>
+<hr>
+  <%= link_to 'Back To Bug List', bugs_path %>
+<hr>

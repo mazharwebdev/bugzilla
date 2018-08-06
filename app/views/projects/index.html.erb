@@ -25,6 +25,11 @@
     <% end %>
   </tbody>
 </table>
+<hr>
+<% if current_user.role == "manager" %>
+  <%= link_to 'Create New Project', new_project_path %>
+<% end %>  
+<hr>
 
 
 

@@ -15,12 +15,20 @@
 //= require rails-ujs
 //= require turbolinks
 //= require bootstrap-sprockets
+//= require jquery-ui
 //= require_tree .
 
 $(document).on('turbolinks:load', function () {
   $('#feature').show();
   $('#j_bug_type').change(function() {
-   $('.status').hide();
-   $('#' + $(this).val()).show();
+     $('.status').hide();
+     $('#' + $(this).val()).show();
   });
+
+  $('.datepicker').datepicker({ 
+    format: "yyyy/mm/dd",
+    maxDate: "+30d",
+    minDate:0
+     });
+
 });
