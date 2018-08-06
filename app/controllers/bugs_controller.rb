@@ -39,6 +39,15 @@ class BugsController < ApplicationController
   end
 
   def update
+    respond_to do |format|
+      if @bug.update(bug_params)
+          format.html { redirect_to @bug, notice: 'Bug was successfully updated.' }
+          format.json { render :show, status: :created, location: @bug }
+      else
+        format.html { render :new }
+        format.json { render json: @bug.errors, status: :unprocessable_entity }
+      end
+    end
   end
 
   def destroy

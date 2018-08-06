@@ -1,2 +1,6 @@
-<h1>Bugs#edit</h1>
-<p>Find me in app/views/bugs/edit.html.erb</p>
+<h1>Editing Bugs</h1>
+
+<%= render 'form', bug: @bug %>
+
+<%= link_to 'Show Project', @bug %> |
+<%= link_to 'Back To Bugs', bugs_path %>

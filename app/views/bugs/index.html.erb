@@ -28,6 +28,7 @@
         <td><%= bug.bug_type %></td>
         <td><%= User.find(bug.created_id).name %></td>
         <td><%= User.find(bug.developed_id).name %></td>
+        <td><%= link_to 'Edit', edit_bug_path(bug) %></td>
       </tr>
     <% end %>
   </tbody>
