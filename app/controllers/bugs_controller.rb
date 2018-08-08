@@ -1,4 +1,5 @@
 class BugsController < ApplicationController
+  before_action :authenticate_user!, except: [:index, :show]
   before_action :set_bug, only: [:show, :edit, :update, :destroy]
    
   def index
@@ -6,6 +7,7 @@ class BugsController < ApplicationController
   end
 
   def show
+    @comments = Comment.where(bug_id: @bug).order("created_at ASC")
   end
 
   def new

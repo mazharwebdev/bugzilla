@@ -1,0 +1,33 @@
+<h3> Total Comment: <strong><%= @bug.comments.count %></strong></h3>
+<li>
+  <% @bug.comments.each do |comment| %>
+    <p><strong>Title:</strong><%= comment.title %></p>  
+    <p><strong>Description:</strong><%= comment.description %></p>  
+    <p><strong>Create_at:</strong><%= comment.created_at %></p>  
+    <p><strong>Created By:</strong><%= comment.user.name %></p>
+    <% if current_user == comment.user %>
+      <p><%= link_to 'Delete Comment', [comment.bug, comment], method: :delete %></p>
+      <p><%= link_to 'Edit Comment', edit_bug_comment_path(comment.bug, comment) %></p>
+    <% end %>  
+    <hr>  
+  <% end %>
+</li>
+<div id="add-comment">
+<%= form_for([@bug,@bug.comments.build]) do |f| %>
+    <fieldset>
+      <ul class "list-unstyled">
+        <li >
+          <%= f.label :title %>
+          <%= f.text_field :title %>
+        </li>
+        <li>
+          <%= f.label "Desc" %>
+          <%= f.text_area :description, rows: 2, cols: 60, placeholder: "write a Comment" %>
+        </li>
+        <li>
+          <%= f.submit %>
+        </li>
+      </ul>
+    </fieldset>
+  <% end %>
+</div>    

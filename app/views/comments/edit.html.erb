@@ -1,0 +1,6 @@
+<h3>Edit Comment </h3>
+<%= form_for([@bug,@comment]) do |f| %>
+  <td><p><%= f.text_field :title %></p></td> 
+  <td><p><%= f.text_area :description %></p></td> 
+  <td><%= f.submit %></td>
+<% end %>
