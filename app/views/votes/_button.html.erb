@@ -1,0 +1,5 @@
+<% if current_user.upvote?(comment) %>
+  <%= button_to "UpVote", downvote_path(comment_id: comment.id), remote: true, method: :delete  %>
+<% else %>
+  <%= button_to "DownVote", upvote_path(comment_id: comment.id), remote: true  %>
+<% end %>

@@ -8,5 +8,8 @@
                   class: 'glyphicon glyphicon-trash text-danger', id: "#{comment.id}_delete", remote: true,
                   title: 'Delete comment', rel: 'tooltip' %>
   <% end %>
+  <%= div_for comment do %>
+   <%= render partial: 'votes/button', locals: { comment: comment } %>
+  <% end %>
 <% end %>
  

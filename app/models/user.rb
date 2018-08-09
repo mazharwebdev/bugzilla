@@ -23,9 +23,20 @@ class User < ApplicationRecord
   #Votes
   has_many :votes
 
-  # def bugs
-  #   Bugs.where("created_id = ? OR developed_id = ?", self.id, self.id)
-  # end
+  def upvote!(comment)
+    self.votes.create!(comment_id: comment.id)
+  end
+
+  # destroys a heart with matching post_id and user_id
+  def downvote!(comment)
+    upvote = self.votes.find_by_comment_id(comment.id)
+    upvote.destroy!
+  end
+
+  # returns true of false if a post is hearted by user
+  def upvote?(comment)
+    self.votes.find_by_comment_id(comment.id)
+  end
 
   # set Default User Callbacks
   private
