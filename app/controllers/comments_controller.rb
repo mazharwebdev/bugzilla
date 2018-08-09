@@ -1,31 +1,52 @@
 class CommentsController < ApplicationController
+  respond_to :js, :html
   before_action :authenticate_user!, except: [:index, :show]
   before_action :find_bug
   before_action :find_comment , only: [:destroy, :edit, :update, :comment_owner]
   before_action :comment_owner, only: [:destroy, :edit, :update]
   
+  def index
+    # created in order to handle renders from this controller, which produce URL 'root/posts/:id/comments'
+    bug = Bug.find(params[:bug_id])
+    redirect_to bug
+  end  
   def show
 
   end
     
   def create
-    @comment = @bug.comments.new(comment_params)
+    @bug = Bug.find(params[:bug_id])
+    @comment = @bug.comments.build(comment_params)
     @comment.user_id = current_user.id
-    @comment.save
-    respond_to do |format|
-      if @comment.save
-          format.html { redirect_to @bug }
-          format.js  
-      else
-         render 'new'
-         
+    if @comment.save
+      @new_comment = @bug.comments.new
+      respond_to do |format|
+        format.html do
+          flash[:success] = 'Your comment has been posted.'
+          redirect_to @bug
+        end
+        format.js
       end
-    end  
+    else
+      @new_comment = @comment
+      respond_to do |format|
+        format.html { render @bug }
+        format.js { render action: 'failed_save' }
+      end
+    end
   end
 
   def destroy
+    @comment = Comment.find(params[:id])
+    @bug = @comment.bug
     @comment.destroy
-    redirect_to bug_path(@bug)
+    respond_to do |format|
+      format.html do
+        flash[:success] = 'Comment deleted.'
+        redirect_to @bug
+      end
+      format.js
+    end
   end
 
   def edit
@@ -46,7 +67,7 @@ class CommentsController < ApplicationController
     end
     
     def comment_params
-      params.require(:comment).permit(:title, :description)
+      params.require(:comment).permit(:description)
     end
     def find_comment
       @comment = @bug.comments.find(params[:id])

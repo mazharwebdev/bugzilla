@@ -1,52 +1,59 @@
 <p id="notice"><%= notice %></p>
-
-<h1> Bug Detail </h1>
 <div class="row">
-  <div class="col-lg-12">
-    <h4>Title:</h4>
-    <%= @bug.title %></p>
+  <h1> Bug Detail </h1>
+  <div class="row">
+    <div class="col-lg-12">
+      <h4>Title:</h4>
+      <%= @bug.title %></p>
+    </div>
   </div>
-</div>
-<div class="row">
-  <div class="col-lg-12">
-   <h4>Description:</h4>
-    <%= @bug.description %>
+  <div class="row">
+    <div class="col-lg-12">
+     <h4>Description:</h4>
+      <%= @bug.description %>
+    </div>
   </div>
-</div>
-<div class="row">    
-  <div class="col-lg-3">
-    <h4>Deadline:</h4>
-    <%= @bug.deadline %>
-  </div>
-  <div class="col-lg-3">
-    <h4>Screenshot:</h4>
-    <%= image_tag(@bug.screenshot_url(:thumb).to_s) %>
-  </div>
-  <div class="col-lg-3">
-    <h4>Bug Type:</h4>
-    <%= @bug.bug_type %>
+  <div class="row">    
+    <div class="col-lg-3">
+      <h4>Deadline:</h4>
+      <%= @bug.deadline %>
+    </div>
+    <div class="col-lg-3">
+      <h4>Screenshot:</h4>
+      <%= image_tag(@bug.screenshot_url(:thumb).to_s) %>
+    </div>
+    <div class="col-lg-3">
+      <h4>Bug Type:</h4>
+      <%= @bug.bug_type %>
+    </div>
+  </div>  
+  <div class="row">  
+    <div class="col-lg-3">
+      <h4>Created By:</h4>
+      <%= User.find(@bug.created_id).name %>
+    </div>
+    <div class="col-lg-3">
+      <h4>Developed By:</h4>
+      <%= User.find(@bug.developed_id).name %>
+    </div>
+    <div class="col-lg-3">
+      
+    </div>
   </div>
 </div>  
-<div class="row">  
-  <div class="col-lg-3">
-    <h4>Created By:</h4>
-    <%= User.find(@bug.created_id).name %>
-  </div>
-  <div class="col-lg-3">
-    <h4>Developed By:</h4>
-    <%= User.find(@bug.developed_id).name %>
-  </div>
-  <div class="col-lg-3">
-    
-  </div>
-</div>
 <hr>
-<section id="comments-section">
-  <ol>
-    <%= render 'comments/comment' %>
-  </ol>
+    <hr class="hr-wider" />
+      <h4 id="comments-count">This Bug has <%= pluralize(@bug.comments.count, 'comment') %></h4>
+    <hr />
 
-</section>
+      <div id="comments-list">
+        <%= render partial: @bug.reload.comments %>
+      </div>
+
+    <div id="comment-form">
+      <%= render 'comments/comment_form' %>
+    </div>
+  </div>
 
 <hr>
   <%= link_to 'Back To Bug List', bugs_path %>

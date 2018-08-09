@@ -1,0 +1,20 @@
+<h3>What do <span class="you">you</span> think?</h3>
+
+<%= form_for [@bug, @new_comment], remote: true do |f| %>
+
+    <%= render 'shared/error_messages', object: f.object %>
+
+    <div class="form-group">
+      <% if signed_in? %>
+          <%= f.text_field :name, readonly: true, value: current_user.name, class: 'form-control' %>
+    <% else %>
+        <%= f.text_field :name, class: 'form-control', placeholder: 'Name (required)' %>
+    <% end %>
+    </div>
+
+    <div class="form-group">
+      <%= f.text_area :description, rows: '10', class: 'form-control' %>
+    </div>
+
+    <%= f.submit 'Post your comment', class: 'btn btn-default' %>
+<% end %>

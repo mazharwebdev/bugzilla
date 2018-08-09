@@ -12,7 +12,7 @@ class Bug < ApplicationRecord
   belongs_to :developer, class_name: "User", foreign_key: "developed_id"
 
   #comments
-  has_many :comments
+  has_many :comments, dependent: :destroy
 
   mount_uploader :screenshot, ScreenshotUploader
 end

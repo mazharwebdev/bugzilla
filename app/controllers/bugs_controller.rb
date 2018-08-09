@@ -7,7 +7,9 @@ class BugsController < ApplicationController
   end
 
   def show
-    @comments = Comment.where(bug_id: @bug).order("created_at ASC")
+    @bug = Bug.find(params[:id])
+    @comments = @bug.comments
+    @new_comment = @bug.comments.new
   end
 
   def new
