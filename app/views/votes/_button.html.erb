@@ -1,5 +1,4 @@
   <%= button_to "VoteUp", upvote_path(comment_id: comment.id, vote_status: true), remote: true, class: "btn btn-default glyphicon glyphicon-thumbs-up"  %>
-  Total VoteUp:<%= comment.votes.where(vote_status: true).size %>
   
   <%= button_to "VoteDown", downvote_path(comment_id: comment.id,vote_status: false), remote: true , class: "btn btn-default glyphicon glyphicon-thumbs-down" %>
-  Total DownVote:<%= comment.votes.where(vote_status: false).size %>
+<h4> Total Score: <%= comment.votes.where(vote_status: true).size - comment.votes.where(vote_status: false).size %> </h4>

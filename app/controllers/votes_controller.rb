@@ -1,13 +1,12 @@
 class VotesController < ApplicationController
-
+  before_action :authenticate_user!
 
   respond_to :js
 
   def upvote
-    @user = current_user
     @comment = Comment.find(params[:comment_id])
-    existing_record_true = @comment.votes.find_by(vote_status: true, user_id: @user.id ,comment_id: params[:comment_id])
-    existing_record_false = @comment.votes.find_by(vote_status: false, user_id: @user.id ,comment_id: params[:comment_id])
+    existing_record_true = @comment.votes.find_by(vote_status: true, user_id: current_user.id ,comment_id: params[:comment_id])
+    existing_record_false = @comment.votes.find_by(vote_status: false, user_id: current_user.id ,comment_id: params[:comment_id])
 
     if !existing_record_true
         if !existing_record_false
@@ -48,10 +47,9 @@ class VotesController < ApplicationController
   end
 
   def downvote
-    @user = current_user
     @comment = Comment.find(params[:comment_id])
-    existing_record_false = @comment.votes.find_by(vote_status: false, user_id: @user.id ,comment_id: params[:comment_id])
-    existing_record_true = @comment.votes.find_by(vote_status: true, user_id: @user.id ,comment_id: params[:comment_id])
+    existing_record_false = @comment.votes.find_by(vote_status: false, user_id: current_user.id ,comment_id: params[:comment_id])
+    existing_record_true = @comment.votes.find_by(vote_status: true, user_id: current_user.id ,comment_id: params[:comment_id])
 
     if !existing_record_false
         if !existing_record_true
