@@ -12,7 +12,7 @@ Rails.application.routes.draw do
 
   match 'upvote', to: 'votes#upvote', via: :post
 
-  match 'downvote', to: 'votes#downvote', via: :delete 
+  match 'downvote', to: 'votes#downvote', via: :post 
 
   root 'dashboard#index'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html

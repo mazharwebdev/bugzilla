@@ -1,5 +1,5 @@
-<% if current_user.upvote?(comment) %>
-  <%= button_to "UpVote", downvote_path(comment_id: comment.id), remote: true, method: :delete  %>
-<% else %>
-  <%= button_to "DownVote", upvote_path(comment_id: comment.id), remote: true  %>
-<% end %>
+  <%= button_to "VoteUp", upvote_path(comment_id: comment.id, vote_status: true), remote: true, class: "btn btn-default glyphicon glyphicon-thumbs-up"  %>
+  Total VoteUp:<%= comment.votes.where(vote_status: true).size %>
+  
+  <%= button_to "VoteDown", downvote_path(comment_id: comment.id,vote_status: false), remote: true , class: "btn btn-default glyphicon glyphicon-thumbs-down" %>
+  Total DownVote:<%= comment.votes.where(vote_status: false).size %>
