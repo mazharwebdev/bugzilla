@@ -1,4 +1,4 @@
-  <%= button_to "VoteUp", upvote_path(comment_id: comment.id, vote_status: true), remote: true, class: "btn btn-default glyphicon glyphicon-thumbs-up"  %>
+<%= button_to "VoteUp", upvote_path(comment_id: comment.id, vote_status: true), remote: true, class: "btn btn-default glyphicon glyphicon-thumbs-up"  %>
   
-  <%= button_to "VoteDown", downvote_path(comment_id: comment.id,vote_status: false), remote: true , class: "btn btn-default glyphicon glyphicon-thumbs-down" %>
-<h4> Total Score: <%= comment.votes.where(vote_status: true).size - comment.votes.where(vote_status: false).size %> </h4>
+<%= button_to "VoteDown", downvote_path(comment_id: comment.id,vote_status: false), remote: true , class: "btn btn-default glyphicon glyphicon-thumbs-down" %>
+  <h4> Total Score: <%= Vote.vote_up_down_total(comment) %> </h4>
