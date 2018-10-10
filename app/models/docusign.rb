@@ -1,0 +1,2 @@
+class Docusign < ApplicationRecord
+end

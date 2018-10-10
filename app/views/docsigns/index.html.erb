@@ -1,0 +1,29 @@
+<h1> Welcome to DocSign Module  </h1>
+<% flash.each do |key, value| %>
+  <div class="alert alert-<%= key %>"><%= value %></div>
+<% end %>
+
+<%= link_to "Create Envelope", new_docsign_path %>
+<br>
+
+<table class="table">
+    <thead>
+      <tr>
+        <th>Signed Status</th>
+        <th>Document View</th>
+        <th>Document View</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @my_hash.each_with_index do |(key, value), index| %>
+          <% filepath = "/singed_doc/"+ value['enveloped_id'] + ".pdf" %>
+          <tr>
+            <td><%= value['status']['signers'][0]['status'] %></td>
+            <td><%= link_to "View And Download Document", value['url']['url'], target: "_blank", class: "btn btn-large btn-primary" %></td>
+            <td><%= link_to "View File", filepath, :target =>"_blank" %></td>
+          </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+  

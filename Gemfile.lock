@@ -95,6 +95,9 @@ GEM
       railties (>= 4.1.0, < 6.0)
       responders
       warden (~> 1.2.3)
+    docusign_rest (0.4.2)
+      json
+      multipart-post (>= 1.2)
     domain_name (0.5.20180417)
       unf (>= 0.0.5, < 1.0.0)
     erubi (1.7.1)
@@ -143,6 +146,7 @@ GEM
     mini_portile2 (2.3.0)
     minitest (5.11.3)
     multi_json (1.13.1)
+    multipart-post (2.0.0)
     nio4r (2.3.1)
     nokogiri (1.8.4)
       mini_portile2 (~> 2.3.0)
@@ -254,6 +258,7 @@ DEPENDENCIES
   contentful
   contentful_model
   devise
+  docusign_rest
   jbuilder (~> 2.5)
   jquery-rails
   jquery-turbolinks
@@ -275,4 +280,4 @@ DEPENDENCIES
   web-console (>= 3.3.0)
 
 BUNDLED WITH
-   1.16.2
+   1.16.5

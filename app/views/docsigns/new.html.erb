@@ -1,0 +1,14 @@
+<h1> Welcome to New Form </h1>
+<% flash.each do |key, value| %>
+  <div class="alert alert-<%= key %>"><%= value %></div>
+<% end %>
+<h1>Text to PDF </h1>
+<%= form_tag :action => 'sending_doc', multipart: true do %>
+    Name:-  <%= text_field :myform, :name %><br><br>
+    Email:- <%= text_field :myform, :email %><br><br>
+    Ema-S:- <%= text_field :myform, :email_subject %><br><br>
+    Ema-B:- <%= text_area :myform, :email_body, :cols => '40', :rows => '5' %><br><br>
+    Document Upload:- <%= file_field_tag  'doc' %>
+    <%= submit_tag "Submit" %>
+<% end %>
+<%= link_to 'Back to Enveloped List', docsigns_path %>

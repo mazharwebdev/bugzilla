@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180803115808) do
+ActiveRecord::Schema.define(version: 20181008084455) do
 
   create_table "bugs", force: :cascade do |t|
     t.string "title"
@@ -36,6 +36,15 @@ ActiveRecord::Schema.define(version: 20180803115808) do
     t.datetime "updated_at", null: false
     t.index ["bug_id"], name: "index_comments_on_bug_id"
     t.index ["user_id"], name: "index_comments_on_user_id"
+  end
+
+  create_table "docusigns", force: :cascade do |t|
+    t.string "envelopeId"
+    t.string "uri"
+    t.datetime "statusDateTime"
+    t.string "status"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "projects", force: :cascade do |t|

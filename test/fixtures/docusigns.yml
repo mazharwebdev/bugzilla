@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  envelopeId: MyString
+  uri: MyString
+  statusDateTime: 2018-10-08 13:44:55
+  status: MyString
+
+two:
+  envelopeId: MyString
+  uri: MyString
+  statusDateTime: 2018-10-08 13:44:55
+  status: MyString
